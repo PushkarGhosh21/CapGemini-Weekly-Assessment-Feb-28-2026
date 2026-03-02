@@ -1,0 +1,28 @@
+package com.jdbc;
+
+import java.sql.DriverManager;
+
+public class Jdbc 
+{
+
+	public static void main(String[] args) 
+	{
+		//Class is a class and forName is a static method
+		//com.mysql.cj.jdbc.Driver is the location
+		//Surrounded by try catch block to handle the exception 
+		//If Driver class not present
+		try 
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			
+			e.printStackTrace();
+		}
+		
+		DriverManager.getConnection(null, null, null)
+		
+	}
+
+}

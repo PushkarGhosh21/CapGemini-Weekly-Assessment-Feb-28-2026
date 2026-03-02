@@ -1,0 +1,18 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+class Testing {
+
+	@Test
+	void test() {
+		EvenCheck e=new EvenCheck();
+		boolean ans=e.Ec(12);
+		boolean exp=true;
+		assertTrue(exp==ans);
+		
+	}
+
+}

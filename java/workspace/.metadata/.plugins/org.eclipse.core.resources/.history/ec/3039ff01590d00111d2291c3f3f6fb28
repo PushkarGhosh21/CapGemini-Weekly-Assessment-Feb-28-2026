@@ -1,0 +1,31 @@
+package method_reference;
+
+import method_reference.Tdemo;
+import method_reference.Test3;
+
+@FunctionalInterface
+interface Tdemo
+{
+	void add(int);
+}
+public class Test3 {
+
+	public void show(String s)
+	{
+		s=s.toUpperCase();
+		System.out.println(s);
+	}
+	public static void main(String[] args) 
+	{
+		
+       Test2 t=new Test2();
+       //Lamda Expression
+       Tdemo d=(String s)->t.show(s);
+       d.show("hello world!");
+       //Method referencing using Object
+       Tdemo d2=t::show;
+       t.show("java is a programming language");
+       
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.model;
+
+public class Launch 
+{
+
+	public static void main(String[] args) 
+	{
+		Employee e=new Employee(1, "Sunil G", "sunnyG@gmail.com", "1983");
+
+	}
+
+}

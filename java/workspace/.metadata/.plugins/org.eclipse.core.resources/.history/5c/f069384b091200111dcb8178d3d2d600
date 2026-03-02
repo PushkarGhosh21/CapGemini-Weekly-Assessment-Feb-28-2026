@@ -1,0 +1,18 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class Junittest {
+
+	@Test
+	void test() {
+		Test2 t=new Test2();
+		String ans=t.rev("Hello");
+		String exp="!olleH";
+		assertEquals(exp, ans);
+	
+	}
+
+}

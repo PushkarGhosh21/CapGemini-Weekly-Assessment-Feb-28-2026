@@ -1,0 +1,5 @@
+package enums;
+
+public enum Roles {
+INTERN, ANALYST,SENIOR_ANALYST,MANAGER,GENERAL_MANAGER
+}

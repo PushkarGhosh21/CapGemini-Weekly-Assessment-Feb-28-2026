@@ -1,0 +1,45 @@
+package exception_unchecked;
+import java.util.Scanner;
+
+// 1. The Simple Custom Exception
+class IncorrectPinException extends Exception {
+    public IncorrectPinException(String message) {
+        super(message);
+    }
+}
+
+// 2. The Main Program
+public class SimplePinValidator {
+    public static void main(String[] args) {
+        String correctPin = "1234"; 
+        int maxTries = 3;
+        Scanner scanner = new Scanner(System.in);
+
+        for (int attempt = 1; attempt <= maxTries; attempt++) {
+            System.out.print("Enter PIN: ");
+            String enteredPin = scanner.nextLine();
+
+            try {
+                // If the PIN is wrong, throw the exception immediately
+                if (!enteredPin.equals(correctPin)) {
+                    throw new IncorrectPinException("Incorrect PIN entered.");
+                }
+                
+                // If it's correct, grant access and stop the loop
+                System.out.println("Access granted!");
+                break; 
+                
+            } catch (IncorrectPinException e) {
+                // Print the error message we passed above
+                System.out.println(e.getMessage());
+                
+                // Check if that was their last try
+                if (attempt == maxTries) {
+                    System.out.println("No more tries.");
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+}

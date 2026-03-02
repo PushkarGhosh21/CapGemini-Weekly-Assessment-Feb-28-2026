@@ -1,0 +1,29 @@
+package method_reference;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+
+public class Test3 {
+
+	public static void main(String[] args) {
+	
+		List<String>employees=new ArrayList<>();
+		employees.add("Kohli");
+		employees.add("Dhoni");
+		employees.add("Rohit");
+		
+		//Lamda Function
+		Function<List<String>,Set<String>>f=(employeeList)->new LinkedHashSet<>(employeeList);
+		System.out.println(f.apply(employees));
+		//Method referencing in constructor
+		Function<List<String>,Set<String>>f2=HashSet::new;
+		System.out.println(f2.apply(employees));
+		
+
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.junit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class Junit1test {
+
+	@Test
+	void test() {
+		
+		//Creating the object 
+		Junit j=new Junit();
+		int ans=j.add(1, 4);
+		int expected=5;
+		assertEquals(expected,ans);
+		
+	}
+
+}

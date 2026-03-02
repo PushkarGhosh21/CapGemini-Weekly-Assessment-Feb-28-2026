@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="package Advanced_Java.StreamAPIs;&#x0A;&#x0A;import java.util.Arrays;&#x0A;import java.util.List;&#x0A;import java.util.function.Consumer;&#x0A;&#x0A;public class TraverseThroughList {&#x0A;    public static void main(String[] args) {&#x0A;        List&lt;Integer&gt; l = Arrays.asList(1, 2, 3);&#x0A;        &#x0A;        for (int i=0; i&lt;l.size(); i++) {&#x0A;            System.out.print(l.get(i));&#x0A;        }&#x0A;        System.out.println();&#x0A;        &#x0A;        for (int a: l) {&#x0A;            System.out.print(a);&#x0A;        }&#x0A;        System.out.println();&#x0A;        &#x0A;        Consumer&lt;Integer&gt; c = new Consumer&lt;Integer&gt;() {&#x0A;&#x0A;            @Override&#x0A;            public void accept(Integer t) {&#x0A;                // TODO Auto-generated method stub&#x0A;                System.out.println(t);&#x0A;            }&#x0A;            &#x0A;        };&#x0A;        System.out.println();&#x0A;        &#x0A;        l.forEach(n -&gt; System.out.print(n));&#x0A;        System.out.println();&#x0A;        &#x0A;        l.forEach(System.out::print);&#x0A;    }&#x0A;}"/>
+			<item value="put"/>
+			<item value="add"/>
+		</list>
+	</section>
+</section>

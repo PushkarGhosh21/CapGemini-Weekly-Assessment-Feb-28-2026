@@ -1,0 +1,69 @@
+package com.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class JDBC 
+{
+
+	public static void main(String args[])
+	{
+		
+		try
+		{
+			Scanner sc=new Scanner(System.in);
+			//Using prepared statements
+//			System.out.println("Enter IDSTUDENTS:");
+//			int id=sc.nextInt();
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc","root","root123");
+//			PreparedStatement ps=con.prepareStatement("SELECT * FROM STUDENTS WHERE IDSTUDENTS=?");
+//			ps.setInt(1, id);
+//			ResultSet rs=ps.executeQuery();
+//			 while(rs.next()) {
+//		            System.out.println(rs.getInt(1)+","+rs.getString(2)+","+rs.getString(3));
+//		           
+//		        }   
+			
+			//Updating the database 
+			System.out.println("Enter IDSTUDENTS to update:");
+			int id=sc.nextInt();
+			sc.nextLine();
+
+			System.out.println("Enter new NAME:");
+			String name=sc.nextLine();
+
+			System.out.println("Enter new Email:");
+			String dept=sc.nextLine();
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection con=DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/jdbc","root","root123");
+
+			PreparedStatement ps=con.prepareStatement(
+					"UPDATE STUDENTS SET Name=?, email=? WHERE IDSTUDENTS=?");
+
+			ps.setString(1, name);
+			ps.setString(2, dept);
+			ps.setInt(3, id);
+
+			int rows=ps.executeUpdate();
+			System.out.println(rows+" record updated");
+			
+			PreparedStatement ps2=con.prepareStatement(
+					"DELETE FROM STUDENTS WHERE IDSTUDENTS=?");
+
+			ps2.setInt(1, id);
+
+			int rows2=ps2.executeUpdate();
+			System.out.println(rows2+" record deleted");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}
