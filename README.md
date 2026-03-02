@@ -1,5 +1,4 @@
-Gemini said
-This is a polished, professional update to your README. It standardizes the structure to emphasize the progression from foundational concepts (Java/SQL) to advanced frameworks (Hibernate).
+
 
 Project Overview
 This repository contains a comprehensive collection of assessments and practice modules covering Core Java, SQL, and Hibernate ORM. It serves as a structured record of technical proficiency in backend development.
