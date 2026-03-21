@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Portal | Auth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --error: #ef4444;
+            --text-main: #1f2937;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        h2 { margin-top: 0; font-weight: 600; color: #111827; }
+        p.subtitle { color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+            color: white;
+        }
+
+        .btn-primary { background: var(--primary); }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-primary:active { transform: scale(0.98); }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: left;
+        }
+        .alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .alert-info    { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+
+        .toggle-area { margin-top: 25px; font-size: 14px; color: #4b5563; }
+        .toggle-area span { color: var(--primary); cursor: pointer; font-weight: 600; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="auth-card">
+
+    <!-- LOGIN SECTION -->
+    <div id="login-section">
+        <div th:if="${param.error}" class="alert alert-error">
+            Wrong password. Please try again.
+        </div>
+        <div th:if="${param.success}" class="alert alert-success">
+            Account created! Log in to continue.
+        </div>
+
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Please enter your details to sign in.</p>
+        <form th:action="@{/signin}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" th:field="*{email}" placeholder="name@company.com" required />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" th:field="*{password}" placeholder="••••••••" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+        <div class="toggle-area">New here? <span onclick="toggle()">Create an account</span></div>
+    </div>
+
+    <!-- SIGNUP SECTION -->
+    <div id="signup-section" class="hidden">
+        <div th:if="${param.alreadyExists}" class="alert alert-error">
+            Email already in use. Please sign in instead.
+        </div>
+        <div th:if="${param.notfound}" class="alert alert-info">
+            No account found. Please create one below.
+        </div>
+
+        <h2>Create Account</h2>
+        <p class="subtitle">Join us to start your journey.</p>
+        <form th:action="@{/signup}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" th:field="*{username}" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" th:field="*{email}" placeholder="name@company.com" required />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" th:field="*{password}" placeholder="At least 8 characters" required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="background: var(--success)">Sign Up</button>
+        </form>
+        <div class="toggle-area">Already have an account? <span onclick="toggle()">Sign in</span></div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    // If redirected with ?notfound or ?alreadyExists, auto-show signup panel
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('notfound') || params.has('alreadyExists')) {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('signup-section').classList.remove('hidden');
+    }
+
+    function toggle() {
+        document.getElementById('login-section').classList.toggle('hidden');
+        document.getElementById('signup-section').classList.toggle('hidden');
+    }
+</script>
+
+</body>
+</html>
